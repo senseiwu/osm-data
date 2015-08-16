@@ -1,4 +1,4 @@
-package com.onedaytrip
+package com.senseiwu
 
 /**
  * Created by tomek on 8/16/15.
