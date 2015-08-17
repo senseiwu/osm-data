@@ -109,7 +109,7 @@ object osm {
       "wget -O %s.osm http://api.openstreetmap.org/api/0.6/map?bbox=%s,%s,%s,%s".format(namegoo, mminlon, mminlat, mmaxlon, mmaxlat).!
       if(mmaxlat>maxlat && mmaxlon>maxlon) return
       if(mmaxlon <= maxlon) loop(name, mminlat,mmaxlat,mminlon+STEP,mmaxlon+STEP)
-      else loop(name, mminlat+STEPINT,mmaxlat+STEP,minlat,minlat+STEP)
+      else loop(name, mminlat+STEP,mmaxlat+STEP,minlon,minlon+STEP)
     }
     loop(name, minlat, minlat+STEP, minlon, minlon+STEP)
   }
@@ -119,8 +119,5 @@ object Applic extends App {
   osm.downloadOsm("krk", 50.05, 50.08, 19.88, 19.98)
 }
 
-class OsmUnmarshall {
-
-}
 
 
