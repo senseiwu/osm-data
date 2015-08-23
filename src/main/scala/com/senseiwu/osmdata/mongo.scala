@@ -1,11 +1,12 @@
-package com.senseiwu
+package com.senseiwu.osmdata
 
 /**
  * Created by tomek on 8/16/15.
  */
 
 import com.mongodb.casbah.Imports._
-import com.senseiwu.poi.{common, substance, amenity}
+import com.senseiwu.osmdata.poi.{common, substance, amenity}
+import com.senseiwu.poi.common
 
 object mongo {
   def conn = MongoConnection()("poi")

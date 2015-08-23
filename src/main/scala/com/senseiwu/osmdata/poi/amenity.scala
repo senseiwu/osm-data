@@ -1,7 +1,7 @@
-package com.senseiwu.poi
+package com.senseiwu.osmdata.poi
 
 import com.mongodb.casbah.Imports._
-import com.senseiwu.poi.common.amenityType
+import common.amenityType
 
 object amenity {
   def base(subtype:String) = MongoDBObject("type" -> "amenity", "subtype" -> substance)

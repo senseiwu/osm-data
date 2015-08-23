@@ -1,4 +1,4 @@
-package com.senseiwu
+package com.senseiwu.osmdata
 
 /**
  * Created by tomek on 8/16/15.

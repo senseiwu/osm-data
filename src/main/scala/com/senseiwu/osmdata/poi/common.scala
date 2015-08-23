@@ -1,4 +1,4 @@
-package com.senseiwu.poi
+package com.senseiwu.osmdata.poi
 
 import com.mongodb.casbah.Imports._
 
