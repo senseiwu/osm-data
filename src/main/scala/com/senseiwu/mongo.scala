@@ -5,13 +5,14 @@ package com.senseiwu
  */
 
 import com.mongodb.casbah.Imports._
+import com.senseiwu.poi.{common, substance, amenity}
 
 object mongo {
-  def accessCollection(name:String) = MongoConnection()("poi")("amenity")
+  def conn = MongoConnection()("poi")
+  def accessCollection(collection:String) = conn.(collection)
+  def drop = conn.dropDatabase()
 
-  def bar(name:String) = MongoDBObject("name" -> name)
-  def bbq(covered:String, fuel:String) = MongoDBObject("covered" -> covered, "fual" -> fuel)
-  def biergarten(name:String, website:String) = MongoDBObject("name" -> name, "website" -> website)
+
   def address(number:Int, name:String, street:String, city:String, country:String, full:String) =
     MongoDBObject(
       "number" -> number,
@@ -32,6 +33,13 @@ object mongo {
       "state" -> state
     )
 
+}
+
+object amenityTest extends App {
+  mongo.drop
+  val col = mongo.accessCollection("amenity")
+  val poiRest = amenity.base("pub").put("info", substance.pub("Re").put("address", common.address(123,"Re","Brozka","Krakow","Poland","")))
+  mongo.accessCollection("poi") += poiRest
 }
 
 object mongotest extends App {
