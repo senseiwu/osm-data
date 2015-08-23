@@ -14,14 +14,14 @@ object substance {
  /**
   * @param name=*	bar's name.
   */
-  def bar(name:String) = amenityType("bar") ++ MongoDBObject("name" -> name)
+  def bar(name:String) = amenityType("bar", MongoDBObject("name" -> name))
 
   /**
    * @param covered yes/no -- default is no.
    * @param fuel wood/electric/charcoal
    * @return mongodb object
    */
-  def bbq(covered:String, fuel:String) = amenityType("bbq") ++ MongoDBObject("covered" -> covered, "fual" -> fuel)
+  def bbq(covered:String, fuel:String) = amenityType("bbq", MongoDBObject("covered" -> covered, "fual" -> fuel))
 
   /**
    * Use these possible tags to expand the feature further.
@@ -43,7 +43,7 @@ object substance {
    * @return
    */
   def biergarten(name:String, website:String) =
-    amenityType("biergarten") ++ MongoDBObject("name" -> name, "website" -> website)
+    amenityType("biergarten", MongoDBObject("name" -> name, "website" -> website))
 
   /**
    * Examples
@@ -66,7 +66,7 @@ Other suggested cuisine types:
    * @return
    */
   def cafe(name:String, cuisine:String) =
-    amenityType("cafe") ++ MongoDBObject("name" -> name, "cuisine" -> cuisine)
+    amenityType("cafe", MongoDBObject("name" -> name, "cuisine" -> cuisine))
 
   /**
    * Possible combinations:
@@ -77,7 +77,7 @@ Other suggested cuisine types:
    * access=*
    * bottle=*
    */
-  def drinking_water() = amenityType("drinking_water")
+  def drinking_water() = amenityType("drinking_water", MongoDBObject())
 
   /**
    * Examples:

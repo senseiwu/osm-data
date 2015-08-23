@@ -7,8 +7,17 @@ import com.mongodb.casbah.Imports._
  */
 object common {
 
-  def osmType(name:String) = MongoDBObject("type" -> name)
-  def amenityType(name:String) = osmType("amenity") ++ MongoDBObject("subtype" -> name)
+  def node(lat:Double,lon:Double, obj:MongoDBObject) =
+    obj ++ MongoDBObject("loc" -> GeoCoords(lat,lon))
+
+  def node(lat:Double,lon:Double, addr:MongoDBObject, obj:MongoDBObject) =
+    obj ++ MongoDBObject("addr" -> addr, "loc" -> GeoCoords(lat,lon))
+
+  def osmType(name:String, subtype:String, obj:MongoDBObject) =
+    obj ++ MongoDBObject("type" -> name, "subtype" -> subtype)
+
+  def amenityType(name:String, obj:MongoDBObject) =
+    osmType("amenity", name, obj)
 
   def loc(lat:String,lon:String) =
     MongoDBObject("loc" ->
