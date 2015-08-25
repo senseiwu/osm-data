@@ -5,6 +5,11 @@ import com.mongodb.casbah.Imports._
 /**
  * Created by tomek on 8/23/15.
  */
+
+case class Coordinate(lat:Double, lon:Double)
+case class NearQuery(loc: Coordinate, range:Int)
+//case class NearQuery(loc: Coordinate, range:Int, query:String)
+
 object common {
 
   def node(lat:Double,lon:Double, obj:MongoDBObject) =

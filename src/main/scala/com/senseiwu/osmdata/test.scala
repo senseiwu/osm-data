@@ -1,7 +1,7 @@
 package com.senseiwu.osmdata
 
 import com.mongodb.casbah.Imports._
-import com.senseiwu.osmdata.poi.{amenity, substance, common}
+import com.senseiwu.osmdata.poi.{Coordinate, amenity}
 
 /**
  * Created by tomek on 8/23/15.

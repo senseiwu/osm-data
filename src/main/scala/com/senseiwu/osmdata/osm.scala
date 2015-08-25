@@ -6,10 +6,9 @@ package com.senseiwu.osmdata
 
 import java.io.{FileInputStream, InputStream}
 import java.util
-import com.thoughtworks.xstream.XStream
+
 import com.thoughtworks.xstream.XStream
 import com.thoughtworks.xstream.io.xml.StaxDriver
-import com.thoughtworks.xstream.io.xml.{StaxDriver}
 
 
 object osm {
@@ -107,7 +106,7 @@ object osm {
     def loop(name:String, mminlat:Double,mmaxlat:Double,mminlon:Double,mmaxlon:Double):Unit = {
       val namegoo = name + "LON" + mminlat+"-"+mmaxlat+"_LAT"+mminlon+"-"+mmaxlon
       "wget -O %s.osm http://api.openstreetmap.org/api/0.6/map?bbox=%s,%s,%s,%s".format(namegoo, mminlon, mminlat, mmaxlon, mmaxlat).!
-      // TODO write to db here
+      // TODO write to getdb here
       if(mmaxlat>maxlat && mmaxlon>maxlon) return
       if(mmaxlon <= maxlon) loop(name, mminlat,mmaxlat,mminlon+STEP,mmaxlon+STEP)
       else loop(name, mminlat+STEP,mmaxlat+STEP,minlon,minlon+STEP)
@@ -117,7 +116,6 @@ object osm {
 }
 
 object Applic extends App {
-  import scala.collection.JavaConversions._
   //osm.downloadOsm("krk", 50.05, 50.08, 19.88, 19.98)
   val d:osm.Osm = osm.fromXML(new FileInputStream("krkLON50.05-50.059999999999995_LAT19.970000000000013-19.980000000000015.osm"))
  // val lst = d.nodes.asS

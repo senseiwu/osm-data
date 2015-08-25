@@ -1,11 +1,11 @@
 package com.senseiwu.osmdata
 
+import com.senseiwu.osmdata.poi.Coordinate
+
 
 /**
  * Created by tomek on 8/25/15.
  */
-
-case class Coordinate(lat:Double, lon:Double)
 
 object utils {
   private def deg2rad(deg: Double) = deg * Math.PI / 180.0

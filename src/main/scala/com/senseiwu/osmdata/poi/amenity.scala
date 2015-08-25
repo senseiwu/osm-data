@@ -1,7 +1,7 @@
 package com.senseiwu.osmdata.poi
 
 import com.mongodb.casbah.Imports._
-import common.amenityType
+import com.senseiwu.osmdata.poi.common.amenityType
 
 object amenity {
   val Key = "amenity"

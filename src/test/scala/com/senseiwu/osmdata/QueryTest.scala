@@ -1,7 +1,7 @@
 package com.senseiwu.osmdata
 
 import com.mongodb.casbah.Imports._
-import com.senseiwu.osmdata.poi.{amenity, substance, common}
+import com.senseiwu.osmdata.poi.{amenity, common, substance}
 import org.scalatest.FunSuite
 
 /**
@@ -9,9 +9,10 @@ import org.scalatest.FunSuite
  */
 class QueryTest extends FunSuite {
 
-  val db = Mongo("poi")
-  db.drop
-  val col = db.accessCollection(amenity.Key)
+  val mongo = Mongo(MongoClient(), "poi")
+  val db = mongo.getdb
+  db.dropDatabase()
+  val col = mongo.collection(amenity.Key)
   col.createIndex(MongoDBObject("loc" -> "2d"))
 
   val point1 =
@@ -45,18 +46,18 @@ class QueryTest extends FunSuite {
 
   test("Check amenity type query") {
     assert(4 == col.size)
-    assert(4 == db.findForType(amenity.Key).size)
-    assert(2 == db.findForSubtype(amenity.Key, amenity.ValBar).length)
-    assert(1 == db.findForSubtype(amenity.Key, amenity.ValRestaurant).length)
-    assert(1 == db.findForSubtype(amenity.Key, amenity.ValBbq).length)
-    assert(0 == db.findForSubtype(amenity.Key, amenity.ValBrothel).length)
+    assert(4 == mongo.findForType(col, amenity.Key).size)
+    assert(2 == mongo.findForSubtype(amenity.Key, amenity.ValBar).length)
+    assert(1 == mongo.findForSubtype(amenity.Key, amenity.ValRestaurant).length)
+    assert(1 == mongo.findForSubtype(amenity.Key, amenity.ValBbq).length)
+    assert(0 == mongo.findForSubtype(amenity.Key, amenity.ValBrothel).length)
   }
 
   test("Check distance search") {
-    assert(1 == db.findNear(amenity.Key, amenity.ValBar, 50.005, 19.7234, 1000).length, "Bar not found")
-    assert(0 == db.findNear(amenity.Key, amenity.ValBbq, 50.005, 19.7234, 1000).length, "BBQ found")
-    assert(2 == db.findNear(amenity.Key, amenity.ValBar, 50.005, 19.7234, 4000).length, "Bar not found")
-    assert(1 == db.findNear(amenity.Key, amenity.ValBbq, 50.005, 19.7234, 4000).length, "BBQ not found")
+    assert(1 == mongo.findNear(amenity.Key, amenity.ValBar, 50.005, 19.7234, 1000).length, "Bar not found")
+    assert(0 == mongo.findNear(amenity.Key, amenity.ValBbq, 50.005, 19.7234, 1000).length, "BBQ found")
+    assert(2 == mongo.findNear(amenity.Key, amenity.ValBar, 50.005, 19.7234, 4000).length, "Bar not found")
+    assert(1 == mongo.findNear(amenity.Key, amenity.ValBbq, 50.005, 19.7234, 4000).length, "BBQ not found")
   }
 
 }
