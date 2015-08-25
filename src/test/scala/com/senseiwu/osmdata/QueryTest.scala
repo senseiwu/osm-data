@@ -60,4 +60,12 @@ class QueryTest extends FunSuite {
     assert(1 == mongo.findNear(amenity.Key, amenity.ValBbq, 50.005, 19.7234, 4000).length, "BBQ not found")
   }
 
+  test("Query for city") {
+    val cityKey = keys.buildKey(keys.KeyAddr, keys.KeyCity)
+
+    assert(1 == mongo.findForKey(col, cityKey, "Chicago").size)
+    assert(3 == mongo.findForKey(col, cityKey, "Krakow").size)
+    assert(0 == mongo.findForKey(col, cityKey, "New York").size)
+  }
+
 }
