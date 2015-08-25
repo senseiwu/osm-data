@@ -26,14 +26,13 @@ object common {
     )
 
   def address(number:Int, name:String, street:String, city:String, country:String, full:String) =
-    MongoDBObject("address" ->
-      MongoDBObject(
-        "number" -> number,
-        "name" -> name,
-        "street" -> street,
-        "city" -> city,
-        "country" -> country,
-        "full" -> full)
+    MongoDBObject(
+      "number" -> number,
+      "name" -> name,
+      "street" -> street,
+      "city" -> city,
+      "country" -> country,
+      "full" -> full
     )
 
   def area(hamlet:String, suburb:String, subdistrict:String, district:String, province:String, state:String) =
