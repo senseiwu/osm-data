@@ -8,13 +8,11 @@ import com.mongodb.casbah.Imports._
 import com.senseiwu.osmdata.poi.{common, substance, amenity}
 import com.senseiwu.osmdata.utils._
 
-
-object mongo {
-  def conn = MongoConnection()("poi")
+class Mongo(dbName:String) {
+  
+  def conn = MongoConnection()(dbName)
   def accessCollection(collection:String) = conn(collection)
   def drop = conn.dropDatabase()
-
-
 
   def findForType(atype:String) =
     accessCollection(atype)
@@ -33,8 +31,11 @@ object mongo {
     )
 
   def findNearWithLimit(atype:String, subtype:String, lat:Double, lon:Double, range:Int, limit:Int) =
-    //accessCollection(atype).find("loc" $near (lat, lon) $maxDistance(range2dist(range))).limit(limit)
+  //accessCollection(atype).find("loc" $near (lat, lon) $maxDistance(range2dist(range))).limit(limit)
     findNear(atype, subtype, lat, lon, range).limit(limit)
+}
 
+object Mongo {
+  def apply(dbName:String):Mongo = new Mongo(dbName)
 }
 
