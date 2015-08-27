@@ -12,25 +12,25 @@ case class NearQuery(loc: Coordinate, range:Int)
 
 object common {
 
-  def node(lat:Double,lon:Double, obj:MongoDBObject) =
+  def node(lat:Double,lon:Double, obj:MongoDBObject):MongoDBObject =
     obj ++ MongoDBObject("loc" -> GeoCoords(lat,lon))
 
-  def node(lat:Double,lon:Double, addr:MongoDBObject, obj:MongoDBObject) =
+  def node(lat:Double,lon:Double, addr:MongoDBObject, obj:MongoDBObject):MongoDBObject =
     obj ++ MongoDBObject("addr" -> addr, "loc" -> GeoCoords(lat,lon))
 
-  def osmType(name:String, subtype:String, obj:MongoDBObject) =
+  def osmType(name:String, subtype:String, obj:MongoDBObject):MongoDBObject =
     obj ++ MongoDBObject("type" -> name, "subtype" -> subtype)
 
-  def amenityType(name:String, obj:MongoDBObject) =
+  def amenityType(name:String, obj:MongoDBObject):MongoDBObject =
     osmType("amenity", name, obj)
 
-  def loc(lat:String,lon:String) =
+  def loc(lat:String,lon:String):MongoDBObject =
     MongoDBObject("loc" ->
       MongoDBObject(
         "lat" -> lat, "lon" -> lat)
     )
 
-  def address(number:Int, name:String, street:String, city:String, country:String, full:String) =
+  def address(number:Int, name:String, street:String, city:String, country:String, full:String):MongoDBObject =
     MongoDBObject(
       "number" -> number,
       "name" -> name,

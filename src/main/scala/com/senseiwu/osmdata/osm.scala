@@ -7,20 +7,93 @@ package com.senseiwu.osmdata
 import java.io.{FileInputStream, InputStream}
 import java.util
 
+import com.mongodb.casbah.Imports._
+import com.senseiwu.osmdata.osm.Node
+import com.senseiwu.osmdata.poi.{amenity, substance, common}
 import com.thoughtworks.xstream.XStream
 import com.thoughtworks.xstream.io.xml.StaxDriver
 
 
 object osm {
 
-  case class Osm(version:String, generator:String, copyright:String, attribution:String, licence:String, bounds:Bounds, nodes:util.ArrayList[Node], ways:util.ArrayList[Way], relations:util.ArrayList[Relation])
-  case class Bounds(minlat:String, minlon:String, maxlat:String, maxlon:String)
-  case class Node(id:String,visible:String,version:String,changeset:String,timestamp:String,user:String, uid:String,lat:String,lon:String, tags:util.ArrayList[Tag])
-  case class Tag(k:String, v:String)
-  case class Way(id:Int, visible:Boolean, version:Int, changeset:Int, timestamp:String, user:String, uid:Int, nds:util.ArrayList[Nd], tags:util.ArrayList[Tag])
-  case class Nd(ref:String)
-  case class Relation(id:Int, visible:Boolean, version:Int, changeset:Int, timestamp:String, user:String, uid:Int, members:util.ArrayList[Member], tags:util.ArrayList[Tag])
-  case class Member(mtype:String, ref:Int, role:String)
+  case class Osm(
+                  version:String,
+                  generator:String,
+                  copyright:String,
+                  attribution:String,
+                  license:String,
+                  bounds:Bounds,
+                  nodes:util.ArrayList[Node],
+                  ways:util.ArrayList[Way],
+                  relations:util.ArrayList[Relation]
+                  )
+
+  case class Bounds(
+                     minlat:String,
+                     minlon:String,
+                     maxlat:String,
+                     maxlon:String)
+
+  case class Node(
+                   id:String,
+                   visible:String,
+                   version:String,
+                   changeset:String,
+                   timestamp:String,
+                   user:String,
+                   uid:String,
+                   lat:String,
+                   lon:String,
+                   tags:util.ArrayList[Tag]) {
+    import scala.collection.JavaConversions._
+    def asScala = NodeScala(id, visible, version, changeset, timestamp, user, uid, lat, lon, tags.toList)
+  }
+
+  case class NodeScala(
+                   id:String,
+                   visible:String,
+                   version:String,
+                   changeset:String,
+                   timestamp:String,
+                   user:String,
+                   uid:String,
+                   lat:String,
+                   lon:String,
+                   tags:List[Tag])
+
+  case class Tag(
+                  k:String,
+                  v:String)
+
+  case class Way(
+                  id:Int,
+                  visible:Boolean,
+                  version:Int,
+                  changeset:Int,
+                  timestamp:String,
+                  user:String,
+                  uid:Int,
+                  nds:util.ArrayList[Nd],
+                  tags:util.ArrayList[Tag])
+
+  case class Nd(
+                 ref:String)
+
+  case class Relation(
+                       id:Int,
+                       visible:Boolean,
+                       version:Int,
+                       changeset:Int,
+                       timestamp:String,
+                       user:String,
+                       uid:Int,
+                       members:util.ArrayList[Member],
+                       tags:util.ArrayList[Tag])
+
+  case class Member(
+                     mtype:String,
+                     ref:Int,
+                     role:String)
 
   private val xstream = new XStream(new StaxDriver)
   xstream.alias("osm", classOf[Osm])
@@ -28,7 +101,7 @@ object osm {
   xstream.useAttributeFor(classOf[Osm], "generator")
   xstream.useAttributeFor(classOf[Osm], "copyright")
   xstream.useAttributeFor(classOf[Osm], "attribution")
-  xstream.useAttributeFor(classOf[Osm], "licence")
+  xstream.useAttributeFor(classOf[Osm], "license")
 
   xstream.alias("bounds", classOf[Bounds])
   xstream.useAttributeFor(classOf[Bounds], "minlat")
@@ -77,9 +150,9 @@ object osm {
   xstream.useAttributeFor(classOf[Member], "ref")
   xstream.useAttributeFor(classOf[Member], "role")
 
-  xstream.addImplicitCollection(classOf[Osm], "nodes")
-  xstream.addImplicitCollection(classOf[Osm], "relations")
-  xstream.addImplicitCollection(classOf[Osm], "ways")
+  xstream.addImplicitCollection(classOf[Osm], "nodes", classOf[Node])
+  xstream.addImplicitCollection(classOf[Osm], "relations", classOf[Relation])
+  xstream.addImplicitCollection(classOf[Osm], "ways", classOf[Way])
   xstream.addImplicitCollection(classOf[Node], "tags")
   xstream.addImplicitCollection(classOf[Way], "nds")
   xstream.addImplicitCollection(classOf[Relation], "members")
@@ -113,12 +186,82 @@ object osm {
     }
     loop(name, minlat, minlat+STEP, minlon, minlon+STEP)
   }
+
+  def allNodesWithTags(file:String):List[Node] = {
+    import scala.collection.JavaConversions._
+    val d:osm.Osm = osm.fromXML(new FileInputStream(file))
+    d.nodes.toList.filter(_.tags != null)
+  }
+
+  def filterAmenityForSubtype(subtype:String, nodes:List[Node]):List[Node] = {
+    import scala.collection.JavaConversions._
+    for (
+      node <- nodes;
+      tag <- node.tags if tag.k.equals("amenity") && tag.v.equals(subtype)
+      //tag2 <- node.asScala.tags if tag2.k.equals("name")
+    ) yield (node)
+  }
+
+  def getSubtypeObj(subtype:String, name:String):MongoDBObject = subtype match {
+    case amenity.ValBar => substance.bar(name)
+  }
+
+  def buildMongoObject(nodes:List[Node]):List[MongoDBObject] = {
+    for (
+      node <- nodes;
+      tag1 <- node.asScala.tags if tag1.k.equals("name")
+    ) yield common.node(node.asScala.lat.toDouble, node.asScala.lon.toDouble, substance.bar(tag1.v))
+  }
+}
+
+object mongoStore {
+  import scala.collection.JavaConversions._
+  def insertBars(list:List[Node]) = {
+    val bars = for (
+      aa <- list;
+      tt <- aa.tags;
+      if tt.k.equals("amenity") && tt.v.equals("bar")
+    ) yield aa
+  }
 }
 
 object Applic extends App {
-  //osm.downloadOsm("krk", 50.05, 50.08, 19.88, 19.98)
-  val d:osm.Osm = osm.fromXML(new FileInputStream("krkLON50.05-50.059999999999995_LAT19.970000000000013-19.980000000000015.osm"))
- // val lst = d.nodes.asS
+  import scala.collection.JavaConversions._
+  val d:osm.Osm = osm.fromXML(new FileInputStream("krkLON50.05-50.059999999999995_LAT19.94000000000001-19.95000000000001.osm"))
+  val filtered = d.nodes.toList.filter(_.tags != null)
+  val a = for (
+    f <- filtered;
+    t <- f.tags;
+    if t.k.equals("amenity")
+  ) yield f
+  println(d.nodes.size() + " >> " + filtered.size + " >> " + a.size)
+
+  val am_bar = for (
+    aa <- a;
+    tt <- aa.tags
+    if tt.k.equals("amenity") && tt.v.equals("bar")
+  ) yield aa
+
+  println("Bars: " + am_bar.size)
+
+  am_bar.foreach(println)
+
+//  def nodeTranform(n:Node):MongoDBObject =
+//    common.node(
+//      50.01, 19.7234,
+//      common.address(123, "", "Brozka", "Krakow", "Poland", ""),
+//      substance.bar("A"))
+//    common.node(
+//      50.01, 19.7234,
+//      substance.bar("d"))
+  //n.tags.find(_.k.equals("name")).get.v
+
+//  val p1 = common.node(
+//    50.01, 19.7234,
+//    substance.bar("d"))
+
+//  println(" >> " + d)
+
 
 }
 
