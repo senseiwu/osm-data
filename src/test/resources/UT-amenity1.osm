@@ -1,0 +1,111 @@
+<osm version="0.6" generator="CGImap 0.4.0 (30697 thorn-03.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+    <bounds minlat="50.0500000" minlon="19.9400000" maxlat="50.0600000" maxlon="19.9500000"/>
+
+    <node id="1" visible="true" version="10" changeset="29151446" timestamp="2015-02-28T09:28:35Z" user="Sto-Sto" uid="690673" lat="50.0582740" lon="19.9473383"/>
+
+    <node id="2" visible="true" version="2" changeset="24392179" timestamp="2014-07-27T21:21:01Z" user="Władysław Komorek" uid="693154" lat="50.0526518" lon="19.9420254">
+        <tag k="bus_numbers" v="614;904"/>
+        <tag k="highway" v="bus_stop"/>
+        <tag k="name" v="Stradom"/>
+    </node>
+
+    <node id="3" visible="true" version="9" changeset="24409907" timestamp="2014-07-28T20:45:36Z" user="Władysław Komorek" uid="693154" lat="50.0584426" lon="19.9482023">
+        <tag k="highway" v="traffic_signals"/>
+    </node>
+
+    <node id="4" visible="true" version="2" changeset="14287506" timestamp="2012-12-15T23:33:03Z" user="Władysław Komorek" uid="693154" lat="50.0513352" lon="19.9355672"/>
+
+    <node id="5" visible="true" version="3" changeset="12663061" timestamp="2012-08-08T22:55:01Z" user="AlbertKa" uid="472558" lat="50.0581669" lon="19.9501450"/>
+
+    <node id="6" visible="true" version="3" changeset="5592732" timestamp="2010-08-25T19:13:03Z" user="sledzik1984" uid="58785" lat="50.0590399" lon="19.9433831"/>
+
+    <node id="7" visible="true" version="4" changeset="24502194" timestamp="2014-08-02T17:55:30Z" user="Władysław Komorek" uid="693154" lat="50.0592951" lon="19.9411536">
+        <tag k="historic" v="memorial"/>
+        <tag k="name" v="Pomnik Pułkownika Narcyza Wiatra-Zawojnego"/>
+    </node>
+
+    <node id="8" visible="true" version="2" changeset="24463164" timestamp="2014-07-31T13:44:11Z" user="Władysław Komorek" uid="693154" lat="50.0570788" lon="19.9419699">
+        <tag k="name" v="Mundo"/>
+        <tag k="tourism" v="hostel"/>
+    </node>
+
+    <node id="9" visible="true" version="4" changeset="24444089" timestamp="2014-07-30T14:23:20Z" user="Władysław Komorek" uid="693154" lat="50.0514718" lon="19.9417621">
+        <tag k="amenity" v="pharmacy"/>
+    </node>
+
+    <node id="10" visible="true" version="2" changeset="24390276" timestamp="2014-07-27T19:33:08Z" user="Władysław Komorek" uid="693154" lat="50.0524406" lon="19.9448216">
+        <tag k="amenity" v="pharmacy"/>
+    </node>
+
+    <node id="11" visible="true" version="4" changeset="24375478" timestamp="2014-07-26T22:23:28Z" user="Władysław Komorek" uid="693154" lat="50.0517266" lon="19.9447809">
+        <tag k="amenity" v="cafe"/>
+    </node>
+
+    <node id="12" visible="true" version="4" changeset="24375478" timestamp="2014-07-26T22:23:28Z" user="Władysław Komorek" uid="693154" lat="50.0516322" lon="19.9448032">
+        <tag k="amenity" v="fast_food"/>
+    </node>
+
+    <node id="13" visible="true" version="4" changeset="24375478" timestamp="2014-07-26T22:23:28Z" user="Władysław Komorek" uid="693154" lat="50.0518027" lon="19.9450004">
+        <tag k="amenity" v="pub"/>
+    </node>
+
+    <node id="14" visible="true" version="4" changeset="13471183" timestamp="2012-10-12T19:33:41Z" user="Władysław Komorek" uid="693154" lat="50.0519347" lon="19.9492051"/>
+
+    <node id="15" visible="true" version="2" changeset="10904874" timestamp="2012-03-07T23:05:56Z" user="vinci4352" uid="598456" lat="50.0554747" lon="19.9415137">
+        <tag k="name" v="Muzeum Przyrodnicze PAN"/>
+        <tag k="tourism" v="museum"/>
+    </node>
+
+    <node id="16" visible="true" version="4" changeset="24373456" timestamp="2014-07-26T20:12:51Z" user="Władysław Komorek" uid="693154" lat="50.0522822" lon="19.9401857">
+        <tag k="addr:city" v="Kraków"/>
+        <tag k="addr:country" v="PL"/>
+        <tag k="addr:housenumber" v="2"/>
+        <tag k="addr:street" v="Koletek"/>
+        <tag k="amenity" v="restaurant"/>
+        <tag k="name" v="Chlopskie Jadlo"/>
+    </node>
+
+    <node id="17" visible="true" version="1" changeset="5062391" timestamp="2010-06-23T22:53:34Z" user="Krycek" uid="54237" lat="50.0589094" lon="19.9491686">
+        <tag k="amenity" v="taxi"/>
+    </node>
+
+    <node id="18" visible="true" version="2" changeset="8806711" timestamp="2011-07-23T14:14:51Z" user="AlbertKa" uid="472558" lat="50.0582242" lon="19.9410968">
+        <tag k="amenity" v="restaurant"/>
+    </node>
+
+    <node id="19" visible="true" version="4" changeset="24409907" timestamp="2014-07-28T20:45:17Z" user="Władysław Komorek" uid="693154" lat="50.0576386" lon="19.9457129">
+        <tag k="addr:city" v="Kraków"/>
+        <tag k="addr:country" v="PL"/>
+        <tag k="addr:housenumber" v="80-82"/>
+        <tag k="addr:street" v="Józefa Dietla"/>
+        <tag k="amenity" v="atm"/>
+        <tag k="atm_ref" v="2053240"/>
+        <tag k="millennium:date" v="2009-05-21 17:13:02"/>
+        <tag k="millennium:network" v="BZ WBK"/>
+        <tag k="millennium:ref" v="19282"/>
+        <tag k="millennium:subtype" v="Euronet"/>
+        <tag k="name" v="Bankomat BZ WBK"/>
+        <tag k="operator" v="Euronet Sp. z o.o."/>
+    </node>
+
+    <node id="20" visible="true" version="2" changeset="13291812" timestamp="2012-09-29T02:03:24Z" user="ppece" uid="164910" lat="50.0590000" lon="19.9493000">
+        <tag k="addr:city" v="Kraków"/>
+        <tag k="addr:country" v="PL"/>
+        <tag k="addr:housenumber" v="8"/>
+        <tag k="addr:street" v="Grzegórzecka"/>
+        <tag k="amenity" v="atm"/>
+        <tag k="atm_ref" v="MBPL473A"/>
+        <tag k="millennium:date" v="2009-05-21 17:13:02"/>
+        <tag k="millennium:network" v="Millennium"/>
+        <tag k="millennium:ref" v="18424"/>
+        <tag k="millennium:subtype" v="Euronet"/>
+        <tag k="name" v="Bankomat Millennium"/>
+        <tag k="operator" v="Euronet Sp. z o.o."/>
+    </node>
+
+    <node id="21" visible="true" version="3" changeset="24390276" timestamp="2014-07-27T19:33:07Z" user="Władysław Komorek" uid="693154" lat="50.0522868" lon="19.9436495">
+        <tag k="amenity" v="theatre"/>
+        <tag k="name" v="Scena El-Jot"/>
+    </node>
+
+</osm>

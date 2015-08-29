@@ -35,7 +35,7 @@ object osm {
                      maxlon:String)
 
   case class Node(
-                   id:String,
+                   id:Int,
                    visible:String,
                    version:String,
                    changeset:String,
@@ -50,7 +50,7 @@ object osm {
   }
 
   case class NodeScala(
-                   id:String,
+                   id:Int,
                    visible:String,
                    version:String,
                    changeset:String,
@@ -231,7 +231,7 @@ object Applic extends App {
   val filtered = d.nodes.toList.filter(_.tags != null)
   val a = for (
     f <- filtered;
-    t <- f.tags;
+    t <- f.tags
     if t.k.equals("amenity")
   ) yield f
   println(d.nodes.size() + " >> " + filtered.size + " >> " + a.size)

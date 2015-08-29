@@ -12,8 +12,8 @@ object amenity {
   val ValBiergarten = "biergarten"
   val ValCafe = "cafe"
   val ValDrinkingWater = "drinking_water"
-  val ValFastFoodVal = "fast_food"
-  val ValFoodCourtVal = "food_court"
+  val ValFastFood = "fast_food"
+  val ValFoodCourt = "food_court"
   val ValIceCreamVal = "ice_cream"
   val ValPub = "pub"
   val ValRestaurant = "restaurant"
@@ -52,6 +52,12 @@ object amenity {
   val ValStudio = "studio"
   val ValSwingerclub = "swingerclub"
   val ValTheatre = "theatre"
+
+  // Healthcare
+  val ValPharmacy = "pharmacy"
+
+  // Financial
+  val ValAtm = "atm"
 
   def base(subtype:String) = MongoDBObject("type" -> "amenity", "subtype" -> substance)
 }
