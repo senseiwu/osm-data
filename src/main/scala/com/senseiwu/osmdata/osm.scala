@@ -189,17 +189,27 @@ object osm {
 
   def allNodesWithTags(file:String):List[Node] = {
     import scala.collection.JavaConversions._
-    val d:osm.Osm = osm.fromXML(new FileInputStream(file))
-    d.nodes.toList.filter(_.tags != null)
+    osm.fromXML(new FileInputStream(file)).nodes.toList.filter(_.tags != null)
+  }
+
+  def filterAmenity(nodes:List[Node]):List[Node] = {
+    import scala.collection.JavaConversions._
+    for (node <- nodes; tag <- node.tags if tag.k.equals(amenity.Key)) yield node
   }
 
   def filterAmenityForSubtype(subtype:String, nodes:List[Node]):List[Node] = {
     import scala.collection.JavaConversions._
-    for (
-      node <- nodes;
-      tag <- node.tags if tag.k.equals("amenity") && tag.v.equals(subtype)
-      //tag2 <- node.asScala.tags if tag2.k.equals("name")
-    ) yield (node)
+    for (node <- nodes; tag <- node.tags if tag.k.equals(amenity.Key) && tag.v.equals(subtype)) yield node
+  }
+
+  def filterNodes(nodeType:String, nodeSubtype:String, nodes:List[Node]):List[Node] = {
+    import scala.collection.JavaConversions._
+    for (node <- nodes; tag <- node.tags if tag.k.equals(nodeType) && tag.v.equals(nodeSubtype)) yield node
+  }
+
+  def filterNodes(nodeType:String, nodes:List[Node]):List[Node] = {
+    import scala.collection.JavaConversions._
+    for (node <- nodes; tag <- node.tags if tag.k.equals(nodeType)) yield node
   }
 
   def getSubtypeObj(subtype:String, name:String):MongoDBObject = subtype match {

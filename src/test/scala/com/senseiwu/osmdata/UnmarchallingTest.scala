@@ -2,7 +2,7 @@ package com.senseiwu.osmdata
 
 import com.mongodb.casbah.Imports._
 import com.senseiwu.osmdata.osm.NodeScala
-import com.senseiwu.osmdata.poi.amenity
+import com.senseiwu.osmdata.poi.{historic, tourism, amenity}
 import org.scalatest.FunSuite
 
 /**
@@ -22,6 +22,14 @@ class UnmarchallingTest extends FunSuite {
       case NodeScala(4,_,_,_,_,_,_,_,_,tags) => assert(3 == tags.size)
       case _ => fail()
     })
+  }
+
+  test("test parsed file be node type") {
+    val tosm = osm.allNodesWithTags("src/test/resources/UT-amenity1.osm")
+    assert(11 == osm.filterAmenity(tosm).size)
+    assert(11 == osm.filterNodes(amenity.Key, tosm).size)
+    assert(2 == osm.filterNodes(tourism.Key, tosm).size)
+    assert(1 == osm.filterNodes(historic.Key, tosm).size)
   }
 
   test("Parse osm file and build amenity list for subtype") {
