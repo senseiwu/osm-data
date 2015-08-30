@@ -12,7 +12,7 @@ class QueryTest extends FunSuite {
   val mongo = Mongo(MongoClient(), "poi")
   val db = mongo.getdb
   db.dropDatabase()
-  val col = mongo.collection(amenity.Key)
+  val col = mongo.collection("test")
   col.createIndex(MongoDBObject("loc" -> "2d"))
 
   val point1 =
@@ -66,6 +66,58 @@ class QueryTest extends FunSuite {
     assert(1 == mongo.findForKey(col, cityKey, "Chicago").size)
     assert(3 == mongo.findForKey(col, cityKey, "Krakow").size)
     assert(0 == mongo.findForKey(col, cityKey, "New York").size)
+  }
+
+  test("Check coutry name") {
+    val cityKey = keys.buildKey(keys.KeyAddr, keys.KeyCity)
+    val countryKey = keys.buildKey(keys.KeyAddr, keys.KeyCountry)
+    val addr:BasicDBObject = mongo.findForKey(col, cityKey, "Chicago").next().get("addr").asInstanceOf[BasicDBObject]
+    val cntr = addr.get("country")
+    println(cntr)
+
+    val lista = mongo.findForKey(col, cityKey, "Krakow")
+
+//    var lstr:List[String] = List()
+//    while (lista.hasNext) {
+//      lstr = lista.next().get("addr").asInstanceOf[BasicDBObject].get("street").toString :: lstr
+//    }
+//
+//    println("Streets: " + lstr)
+
+
+    lazy val aa = parse(lista)
+    println("Attr: " + aa)
+
+    case class Coordinate(lat:String, lon:String)
+    case class Attraction(name:String, img:String, loc:Coordinate)
+
+    def parse(obj:MongoCursor):List[Attraction] = {
+
+      def getItem(key:String, obj:DBObject) = {
+        val value = obj.get(key)
+        if (value == null) ""
+        else value.toString
+      }
+
+      def getItemIx(key:Int, obj:BasicDBList) = obj.get(key).toString
+
+      def getLoc(obj:DBObject):Coordinate = {
+        val value:BasicDBList = obj.get("loc").asInstanceOf[BasicDBList]
+        if(value == null) Coordinate("", "")
+        else Coordinate(getItemIx(0, value), getItemIx(1, value))
+      }
+
+      var ll:List[Attraction] = List()
+      while(obj.hasNext) {
+        val item = obj.next()
+        println("item: " + item)
+        val loc:BasicDBList = item.get("loc").asInstanceOf[BasicDBList]
+        val lat = loc.get(0).toString
+        val lon = loc.get(1).toString
+        ll = Attraction(getItem("name", item), getItem("img", item), Coordinate(lat, lon)) :: ll
+      }
+      ll
+    }
   }
 
 }
