@@ -106,6 +106,7 @@ db.topics.insert(
 )
 
 
+
 db.topics.insert(
   {name:"History", key:"historic", description:"This is used to describe various historic places. For example: archaeological sites, wrecks, ruins, castles and ancient buildings.",
    subtopics :
@@ -116,7 +117,7 @@ db.topics.insert(
         enabled:false,
         group: {key:"", name:""},
         description:"A place in which evidence of past activity is preserved",
-        image:""
+        image:"http://wiki.openstreetmap.org/wiki/File:Dscf0105_600.jpg"
       },
       {
         key:"aircraft",
@@ -124,7 +125,7 @@ db.topics.insert(
         enabled:false,
         group: {key:"", name:""},
         description:"A decommissioned aircraft which generally remains in one place",
-        image:""
+        image:"http://wiki.openstreetmap.org/wiki/File:Historic_aircraft_monki.JPG"
       },
       {
         key:"battlefield",
@@ -132,7 +133,7 @@ db.topics.insert(
         enabled:false,
         group: {key:"", name:""},
         description:"The site of a battle or military skirmish in the past. This could be on land or at sea.",
-        image:""
+        image:"http://wiki.openstreetmap.org/wiki/File:Fort_Donelson_river_battery_(1).jpg"
       },
       {
         key:"boundary_stone",
@@ -140,7 +141,7 @@ db.topics.insert(
         enabled:false,
         group: {key:"", name:""},
         description:"A historic boundary stone usually found along the way.",
-        image:""
+        image:"http://wiki.openstreetmap.org/wiki/File:Boundary_stone_St_Brelade_and_St_Peter,_Jersey.jpg"
       },
       {
         key:"castle",
@@ -148,7 +149,7 @@ db.topics.insert(
         enabled:false,
         group: {key:"", name:""},
         description:"Castles are (often fortified) buildings from medieval and modern times.",
-        image:""
+        image:"http://wiki.openstreetmap.org/wiki/File:Dscf0226_600.jpg"
       },
       {
         key:"cannon",
@@ -156,7 +157,7 @@ db.topics.insert(
         enabled:false,
         group: {key:"", name:""},
         description:"A historic/retired cannon. Usually found at on forts or battlefields.",
-        image:""
+        image:"http://wiki.openstreetmap.org/wiki/File:Muzzle_loading_cannons_at_the_Swedish_Naval_Museum_(6648150909).jpg"
       },
       {
         key:"city_gate",
@@ -164,6 +165,56 @@ db.topics.insert(
         enabled:false,
         group: {key:"", name:""},
         description:"A Wikipedia says: city gate (or town gate) is a gate within a city wall.",
+        image:"http://wiki.openstreetmap.org/wiki/File:Spaarnwouder-_of_Amsterdamse_poort.jpg",
+        link:"https://en.wikipedia.org/wiki/City_gate"
+      },
+      {
+        key:"citywalls",
+        name:"Citywalls",
+        enabled:false,
+        group: {key:"", name:""},
+        description:"",
+        image:"",
+        link:"http://en.wikipedia.org/wiki/en:Defensive_wall"
+      },
+      {
+        key:"farm",
+        name:"Farm",
+        enabled:false,
+        group: {key:"", name:""},
+        description:"A historical farm, kept in it's original state.",
+        image:"http://wiki.openstreetmap.org/wiki/File:Memorial-Day-2003.jpg"
+      },
+      {
+        key:"fort",
+        name:"Fort",
+        enabled:false,
+        group: {key:"", name:""},
+        description:"A military fort – distinct from a castle as it is generally more modern",
+        image:"http://wiki.openstreetmap.org/wiki/File:Kom%C3%A1rom_Fortress_03.jpg"
+      },
+      {
+        key:"",
+        name:"",
+        enabled:true,
+        group: {key:"", name:""},
+        description:"",
+        image:""
+      },
+      {
+        key:"",
+        name:"",
+        enabled:true,
+        group: {key:"", name:""},
+        description:"",
+        image:""
+      },
+      {
+        key:"",
+        name:"",
+        enabled:true,
+        group: {key:"", name:""},
+        description:"",
         image:""
       },
       {
