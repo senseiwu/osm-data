@@ -1,6 +1,7 @@
 package com.senseiwu.osmdata
 
 import com.mongodb.casbah.Imports._
+import com.mongodb.util.JSON
 import com.senseiwu.osmdata.poi.{amenity, common, substance}
 import org.scalatest.FunSuite
 
@@ -118,6 +119,49 @@ class QueryTest extends FunSuite {
       }
       ll
     }
+  }
+
+  test("s") {
+    val tcol = mongo.collection("topic")
+    val obj1 = MongoDBObject("topic" -> "amenity", "subtopics" -> MongoDBList("a","b","c"))
+    val obj2 = MongoDBObject("topic" -> "park", "subtopics" -> MongoDBList("aa","bb","cc"))
+    val obj3 = MongoDBObject("topic" -> "history", "subtopics" -> MongoDBList("aaa","bbb","ccc"))
+
+    val list = MongoDBList(obj1, obj2, obj3)
+
+//    tcol.insert(obj1)
+//    tcol.insert(obj2)
+//    tcol.insert(obj3)
+    tcol.insert(MongoDBObject("topics" -> list))
+    println("type " + tcol.find("topics" $exists(true)).next().getClass)
+    //BasicDBObject
+    val v = tcol.find("topics" $exists(true)).next()
+    //tcol.foreach(println)
+    JSON.serialize(v)
+    //println(tcol.find("topics" $exists(true)).next().get("topics"))
+    case class Topics(topics:List[(Topic, List[String])])
+    case class Topic(topic:String)
+
+//    val t = JSON.parse(tcol.find("topics" $exists(true)).next().get("topics").toString)
+//
+//   println(t)
+    val t = tcol.find("topics" $exists true)
+    println(t)
+    val topics = t.next().getAs[MongoDBList]("topics")
+    println(topics.get)
+    topics.get.foreach(println)
+    val tt = topics.get
+
+    for(t <- tt) {
+      convert(t)
+    }
+
+    def convert(obj:MongoDBObject): Unit = {
+      val topic = obj.getAs[String]("topic")
+      val subtop = obj.getAs[List[String]]("subtopics")
+      println(topic + ", " + subtop)
+    }
+
   }
 
 }

@@ -235,6 +235,10 @@ object mongoStore {
   }
 }
 
+object SzPoi extends App {
+  osm.downloadOsm("sz_", 22.49, 22.55, 113.90, 113.96)
+}
+
 object Applic extends App {
   import scala.collection.JavaConversions._
   val d:osm.Osm = osm.fromXML(new FileInputStream("krkLON50.05-50.059999999999995_LAT19.94000000000001-19.95000000000001.osm"))
