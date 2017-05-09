@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="CGImap 0.4.0 (20953 thorn-02.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+    <bounds minlat="48.1400000" minlon="11.5400000" maxlat="48.1450000" maxlon="11.5430000"/>
+
+<node id="398692" visible="true" version="19" changeset="24168687" timestamp="2014-07-15T20:10:49Z" user="Eckhart Wörner" uid="2675" lat="48.1452196" lon="11.5414971">
+
+    </node>
+
+    <node id="398692" visible="true" version="19" changeset="24168687" timestamp="2014-07-15T20:10:49Z" user="Eckhart Wörner" uid="2675" lat="48.1452196" lon="11.5414971">
+        <tag k="crossing" v="traffic_signals"/>
+        <tag k="highway" v="traffic_signals"/>
+        <tag k="tmc" v="DE:35375"/>
+    </node>
+    <node id="703726662" visible="true" version="2" changeset="9695595" timestamp="2011-10-30T16:47:20Z" user="Q12" uid="534662" lat="48.1443198" lon="11.5427373"/>
+    <node id="705213136" visible="true" version="4" changeset="25185559" timestamp="2014-09-02T16:10:58Z" user="jacobbraeutigam" uid="1260280" lat="48.1444943" lon="11.5411954">
+        <tag k="addr:city" v="München"/>
+        <tag k="addr:country" v="DE"/>
+        <tag k="addr:housenumber" v="22"/>
+        <tag k="addr:postcode" v="80636"/>
+        <tag k="addr:street" v="Marlene-Dietrich-Straße"/>
+        <tag k="source" v="local_knowledge"/>
+    </node>
+
+<way id="294894604" visible="true" version="4" changeset="24449290" timestamp="2014-07-30T18:38:48Z" user="Władysław Komorek" uid="693154">
+  <nd ref="2985263271"/>
+  <nd ref="2985263274"/>
+  <tag k="building" v="yes"/>
+  <tag k="building:levels" v="6"/>
+ </way>
+ <way id="294939760" visible="true" version="1" changeset="24419970" timestamp="2014-07-29T11:38:02Z" user="Władysław Komorek" uid="693154">
+  <nd ref="2985818199"/>
+  <nd ref="2985818189"/>
+  <nd ref="2985817916"/>
+  <tag k="building" v="yes"/>
+  <tag k="building:levels" v="1"/>
+ </way>
+ <way id="294939763" visible="true" version="1" changeset="24419970" timestamp="2014-07-29T11:38:02Z" user="Władysław Komorek" uid="693154">
+  <nd ref="2985818288"/>
+  <nd ref="2985817914"/>
+  <nd ref="2985818283"/>
+  <nd ref="2985817919"/>
+  <tag k="building" v="yes"/>
+  <tag k="building:levels" v="1"/>
+ </way>
+ <way id="294939766" visible="true" version="1" changeset="24419970" timestamp="2014-07-29T11:38:03Z" user="Władysław Komorek" uid="693154">
+  <nd ref="2985817923"/>
+  <nd ref="2985817918"/>
+  <nd ref="2985818187"/>
+  <nd ref="2985818190"/>
+  <nd ref="2985818287"/>
+  <tag k="building" v="yes"/>
+  <tag k="building:levels" v="1"/>
+ </way>
+</osm>

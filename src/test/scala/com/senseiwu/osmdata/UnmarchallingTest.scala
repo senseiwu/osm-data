@@ -1,8 +1,8 @@
 package com.senseiwu.osmdata
 
 import com.mongodb.casbah.Imports._
-import com.senseiwu.osmdata.osm.NodeScala
-import com.senseiwu.osmdata.poi.{historic, tourism, amenity}
+import com.senseiwu.osmdata.poi.{amenity, historic, tourism}
+import com.senseiwu.osmdata.serializer.NodeScala
 import org.scalatest.FunSuite
 
 /**
