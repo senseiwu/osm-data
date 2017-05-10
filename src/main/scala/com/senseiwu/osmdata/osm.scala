@@ -4,7 +4,7 @@ package com.senseiwu.osmdata
  * Created by tomek on 8/16/15.
  */
 
-import java.io.{FileInputStream}
+import java.io.{File, FileInputStream}
 
 import com.mongodb.casbah.Imports._
 import com.senseiwu.osmdata.poi.{amenity, common, substance}
@@ -13,17 +13,6 @@ import com.senseiwu.osmdata.serializer.{Node, Osm, xstream}
 object osm {
 
   val STEP:Double = 0.01
-  val STEPINT:Int = 1
-
-  def fun2(minlat:Int,maxlat:Int,minlon:Int,maxlon:Int) = {
-    def loop(mminlat:Int,mmaxlat:Int,mminlon:Int,mmaxlon:Int):Unit = {
-      if(mmaxlat>maxlat && mmaxlon>maxlon) return
-      println("-- osm data get ", mminlat, mmaxlat, mminlon, mmaxlon)
-      if(mmaxlon <= maxlon) loop(mminlat,mmaxlat,mminlon+STEPINT,mmaxlon+STEPINT)
-      else loop(mminlat+STEPINT,mmaxlat+STEPINT,minlon,minlon+STEPINT)
-    }
-    loop(minlat, minlat+STEPINT, minlon, minlon+STEPINT)
-  }
 
   def downloadOsm(path:String, fileNamePrefix:String, minlat:Double, maxlat:Double, minlon:Double, maxlon:Double):Unit = {
     import sys.process._
@@ -36,6 +25,16 @@ object osm {
       else loop(name, mminlat+STEP,mmaxlat+STEP,minlon,minlon+STEP)
     }
     loop(path.concat(fileNamePrefix), minlat, minlat+STEP, minlon, minlon+STEP)
+  }
+
+  def downloadedFiles(path:String): List[File] = {
+    val dir = new File(path)
+    if(dir.exists() && dir.isDirectory) dir.listFiles().toList.filter(f => f.getName.endsWith("osm"))
+    else Nil
+  }
+
+  def osmObjectFromFile(path:String, fileName:String): Osm = {
+    xstream.fromXML(new FileInputStream(path.concat("/").concat(fileName)))
   }
 
   def allNodesWithTags(file:String):List[Node] = {
